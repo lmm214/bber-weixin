@@ -13,7 +13,7 @@ const request = require('request')
 const path = require('path');
 const fs = require('fs');
 
-const token = '验证令牌' // 微信公众号的服务器验证用的令牌 token
+const token = 'bber-weixin' // 微信公众号的服务器验证用的令牌 token
 
 //填入自己的微信公众号appid和appsecret
 var wxappid = '微信公众号appid',
