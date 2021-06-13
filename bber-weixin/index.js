@@ -101,7 +101,7 @@ exports.main = async (event, context) => {
                         if (content.slice(0,1) == '/' && content.slice(0,2) !== '/:') {
                             let letTer = content.slice(1,2)
                             if (letTer == 'a' || letTer == 'c' || letTer == 'd' || letTer == 'e' || letTer == 'f' || letTer == 'l' || letTer == 's'  ) {
-                                let res = await cloudRequest(cloudHttpUrl,cloudKey,content)
+                                let res = await cloudRequest(cloudHttpUrl,cloudKey,createTime,content)
                                 if(res.statusCode == 200){
                                     content = JSON.parse(res.body).content
                                 }else{
@@ -121,7 +121,7 @@ exports.main = async (event, context) => {
                                     content = await upPicTbc(test_media_id, houzhui)
                                 }
                             }
-                            let res = await cloudRequest(cloudHttpUrl,cloudKey,content)
+                            let res = await cloudRequest(cloudHttpUrl,cloudKey,createTime,content)
                             //console.log(res)
                             if(res.statusCode == 200){
                                 if (msgType == 'text') {
@@ -157,9 +157,9 @@ exports.main = async (event, context) => {
 }
 
 //使用promise封装request解决异步请求致无法获取结果的问题
-function cloudRequest(cloudHttpUrl,cloudKey,content){
+function cloudRequest(cloudHttpUrl,cloudKey,createTime,content){
     return new Promise(function(resoved,rejevted){
-        var param1 = {'key': cloudKey,'text': content,'from':'微信公众号'}
+        var param1 = {'key': cloudKey,'time': createTime,'text': content,'from':'微信公众号'}
         request({
             url: cloudHttpUrl,
             method: 'POST',
